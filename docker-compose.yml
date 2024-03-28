@@ -1,0 +1,15 @@
+version: "3"
+services:
+
+  web:
+    build:
+      context: .
+      dockerfile: Dockerfile
+      target: ${DOCKER_WEB_TARGET:-runnerDevelopment}
+    depends_on: 
+      - db
+    hostname: ${DOCKER_WEB_HOSTNAME:-2a5-web-development}
+    image: ${DOCKER_WEB_IMAGE:-2a5-web-development}
+    ports:
+      - "${DOCKER_WEB_PORT:-3000}:3000"
+    container_name: ${DOCKER_WEB_CONTAINERNAME:-2a5-web-development}
