@@ -1,6 +1,6 @@
 export async function getByUrlShort(urlShort: string) {
 
-    const endpoint = `http://localhost:3000/api/urlShort/${urlShort}`;
+    const endpoint = "http://" + ( process.env.DOCKER_API_HOSTNAME || "localhost" ) + ":" + ( process.env.DOCKER_API_PORT || "3000" ) + "/api/urlShort/" + urlShort;
     const response = await fetch(endpoint);
 
     if (response.status == 410) {

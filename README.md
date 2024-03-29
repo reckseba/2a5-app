@@ -42,7 +42,10 @@ The container will join the existing 2a5 network
 docker compose up -d
 ```
 
-
+Stop it:
+```bash
+docker compose down
+```
 
 # Cleanup locally
 
