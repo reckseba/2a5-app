@@ -15,7 +15,7 @@ type SuccessType = {
 }
 
 async function doAPIRequest(urlLong: string) {
-    const endpoint = "http://localhost:3000/api/urlLong/new";
+    const endpoint = "http://" + ( process.env.DOCKER_API_HOSTNAME || "localhost" ) + ":" + ( process.env.DOCKER_API_PORT || "3000" ) + "/api/urlLong/new";
     const payload = {
         urlLong: urlLong
     };

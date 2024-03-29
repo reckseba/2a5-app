@@ -1,0 +1,23 @@
+version: "3"
+services:
+
+  app:
+    build:
+      context: .
+      dockerfile: Dockerfile
+      target: runner
+    hostname: 2a5-app-development
+    image: 2a5-app-development
+    ports:
+      - "3001:3001"
+    container_name: 2a5-app-development
+    environment:
+      - DOCKER_API_HOSTNAME=2a5-api-development
+      - DOCKER_API_PORT=3000
+    networks:
+      - 2a5-extern
+
+networks:
+  2a5-extern:
+    name: 2a5
+    external: true

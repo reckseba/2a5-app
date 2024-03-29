@@ -1,13 +1,9 @@
 # 2a5-app
 
-See 2a5-api first
-
-Docker container are running
+See 2a5-api first and follow "Deploy Development (locally)"
 
 2a5-api-development 3000
 2a5-db-development 5432
-
-
 
 
 # Development
@@ -38,6 +34,13 @@ Start coding and open [http://localhost:3001](http://localhost:3001) with your b
 
 Stop it with CTRL+C
 
+
+# Run with Docker
+
+The container will join the existing 2a5 network
+```bash
+docker compose up -d
+```
 
 
 
