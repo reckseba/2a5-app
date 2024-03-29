@@ -6,8 +6,7 @@
     "dev": "next dev -p 3001",
     "build": "next build",
     "start": "next start",
-    "lint": "next lint",
-    "test": "npx cypress run"
+    "lint": "next lint"
   },
   "dependencies": {
     "@types/psl": "^1.1.0",
