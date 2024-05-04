@@ -1,13 +1,11 @@
-version: "3"
 services:
 
   app:
     build:
       context: .
       dockerfile: Dockerfile
-      target: runner
+      target: dev
     hostname: 2a5-app-development
-    image: 2a5-app-development
     ports:
       - "3001:3001"
     container_name: 2a5-app-development
@@ -16,6 +14,26 @@ services:
       - DOCKER_API_PORT=3000
     networks:
       - 2a5-extern
+    command: npm run dev
+    develop:
+      watch:
+        - action: sync
+          path: ./components
+          target: /app/components
+        - action: sync
+          path: ./lib
+          target: /app/lib
+        - action: sync
+          path: ./pages
+          target: /app/pages
+        - action: sync
+          path: ./public
+          target: /app/public
+        - action: sync
+          path: ./styles
+          target: /app/styles
+        - action: rebuild
+          path: package.json
 
 networks:
   2a5-extern:

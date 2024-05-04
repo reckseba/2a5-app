@@ -24,7 +24,7 @@ cd 2a5-app
 npm install
 ```
 
-Run the nodejs development server:
+Run the nodejs development server (It supports hot reload):
 ```bash
 npm run dev
 ```
@@ -37,12 +37,12 @@ Stop it with CTRL+C
 
 # Run with Docker
 
-The container will join the existing 2a5 network
+The container will join the existing 2a5 network (It supports hot reload):
 ```bash
-docker compose up -d
+docker compose up --build --watch
 ```
 
-Stop it:
+Stop it by ctrl+c or if detached:
 ```bash
 docker compose down
 ```
