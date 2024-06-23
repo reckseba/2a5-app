@@ -1,4 +1,5 @@
 import type { NextApiRequest, NextApiResponse } from "next";
+import { IncomingHttpHeaders } from "http";
 import psl from "psl";
 
 import { getHostname } from "../../lib/hostnames";
@@ -14,7 +15,7 @@ type SuccessType = {
     urlShortFull: string;
 }
 
-async function doAPIRequest(urlLong: string) {
+async function doAPIRequest(urlLong: string, ipAddress: string) {
     const endpoint = "http://" + ( process.env.DOCKER_API_HOSTNAME || "localhost" ) + ":" + ( process.env.DOCKER_API_PORT || "3000" ) + "/api/urlLong/new";
     const payload = {
         urlLong: urlLong
@@ -22,6 +23,7 @@ async function doAPIRequest(urlLong: string) {
     const options = {
         headers: {
             "Content-Type": "application/json",
+            "x-real-ip": ipAddress
         },
         method: "PUT",
         body: JSON.stringify(payload)
@@ -85,8 +87,19 @@ export default async function handler(
         return;
     }
 
+    const getClientIpAddress = (headers: IncomingHttpHeaders): string => {
+
+        if (headers.hasOwnProperty("x-real-ip")) {
+            return headers["x-real-ip"] as string;
+        }
+
+        return "127.0.0.1";
+    };
+
+    const ipAddress = getClientIpAddress(req.headers);
+
     // finally check if the requested urlLong is already in database
-    const response = await doAPIRequest(req.body.urlLong);
+    const response = await doAPIRequest(req.body.urlLong, ipAddress);
 
     if (response == false) {
         res.status(400).json({
